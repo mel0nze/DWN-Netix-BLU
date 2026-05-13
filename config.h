@@ -73,6 +73,7 @@
 	static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_smecher, "-sf", col_gray4, NULL };
 	static const char *termcmd[]  = { "st", NULL };
 	static const char *thunar[] = {"thunar", NULL};
+	static const char *flameshot[] = {"flameshot", "gui", NULL};
 
 	static const Key keys[] = {
 		/* modifier                     key        function        argument */
@@ -86,13 +87,12 @@
 		{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
 		{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 		{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-		{ MODKEY,                       XK_z,      zoom,           {0} },
+		{ MODKEY,                       XK_z,      spawn,          {.v = flameshot } },
 		{ MODKEY,                       XK_Tab,    view,           {0} },
 		{ MODKEY,                       XK_q,      killclient,     {0} },
 		{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 		{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 		{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-		{ MODKEY,                       XK_space,  setlayout,      {0} },
 		{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 		{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 		{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
@@ -121,7 +121,6 @@
 		{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 		{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 		{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-//		{ Mod1Mask,             XK_f,                           togglefloating, {0} },
 		{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 		{ ClkTagBar,            0,              Button1,        view,           {0} },
 		{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
