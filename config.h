@@ -1,15 +1,18 @@
-	/* See LICENSE file for copyright and license details. */
+/* See LICENSE file for copyright and license details. */
 
 /* appearance */
 
-    /* anybar patch */
-    static const int usealtbar = 1;
-    static const char *altbarclass = "Polybar";
-    static const char *alttrayname = "tray";
-
 	static const unsigned int borderpx = 1; /* border pixel of windows */
 
-/*	static const unsigned int borderpx  = 1;        /* border pixel of windows */
+	static const char normbgcolor[]           = "#000000";
+	static const char normbordercolor[]       = "#003B00";
+	static const char normfgcolor[]           = "#00FF41";
+	static const char selbgcolor[]            = "#001A00";
+	static const char selbordercolor[]        = "#00FF41";
+	static const char selfgcolor[]            = "#33FF66";
+
+
+/*	static const unsigned int borderpx  = 1;           border pixel of windows */
 	static const unsigned int snap      = 32;       /* snap pixel */
 	static const int showbar            = 1;        /* 0 means no bar */
 	static const int topbar             = 1;        /* 0 means bottom bar */
@@ -19,11 +22,11 @@
 	static const char col_gray2[]       = "#444444";
 	static const char col_gray3[]       = "#bbbbbb";
 	static const char col_gray4[]       = "#eeeeee";
-	static const char col_lightblue[]   = "#8d0dc9";
+	static const char col_smecher[]     = "#ec9255";
 	static const char *colors[][3]      = {
 		/*               fg         bg         border   */
 		[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-		[SchemeSel]  = { col_gray4, col_lightblue,  col_lightblue  },
+		[SchemeSel]  = { col_gray4, col_smecher,  col_smecher  },
 	};
 
 	/* tagging */
@@ -37,6 +40,7 @@
 		/* class      instance    title       tags mask     isfloating   monitor */
 		{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 		{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	
 	};
 
 	/* layout(s) */
@@ -66,15 +70,13 @@
 
 	/* commands */
 	static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-	static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_lightblue, "-sf", col_gray4, NULL };
-	static const char *termcmd[]  = { "kitty", NULL };
-	static const char *rofi[] = {"rofi", "-show", "drun", "-theme", "~/.config/rofi/config.rasi", NULL };
+	static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_smecher, "-sf", col_gray4, NULL };
+	static const char *termcmd[]  = { "st", NULL };
 	static const char *thunar[] = {"thunar", NULL};
 
 	static const Key keys[] = {
 		/* modifier                     key        function        argument */
-		{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
-		{ MODKEY,                       XK_d,      spawn,          {.v = rofi } },
+		{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 		{ MODKEY,                       XK_e,      spawn,          {.v = thunar } },
 		{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 		{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -119,7 +121,7 @@
 		{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 		{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 		{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-		{ Mod1Mask,             MODKEY,         XK_space,       togglefloating, {0} },
+//		{ Mod1Mask,             XK_f,                           togglefloating, {0} },
 		{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 		{ ClkTagBar,            0,              Button1,        view,           {0} },
 		{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
